@@ -44,3 +44,7 @@ Server-wide vehicle speed limiter for FiveM (Qbox / QBCore compatible) with conf
 1\. Create resource folder:
 
 2\. ensure skeezle_speedlimiter
+
+## License
+
+This project is licensed under the MIT License. You are free to use, modify, and distribute this script, including for commercial use, as long as the original license notice is included.
