@@ -40,22 +40,28 @@ AddEventHandler('playerJoining', function()
     ply.state.speedLimiter_defaultOn = Config.DefaultOn == true
 end)
 
--- Toggle request from client
+-- -- Toggle request from client
 RegisterNetEvent('qbx_speedlimiter:server:toggle', function()
+    if not Config.AllowToggle then return end
+
     local src = source
     local ply = Player(src)
     if not ply then return end
 
-    -- if job exempt, ignore toggle & force off (client will also respect this)
+    -- If job exempt, force OFF (so they can't turn it on/off and get weird state)
     if isExemptJob(src) then
         ply.state.speedLimiter_forceOff = true
+        ply.state.speedLimiter_userOn = false
         return
     end
 
+    ply.state.speedLimiter_forceOff = false
+
     local current = ply.state.speedLimiter_userOn
-    if current == nil then current = Config.DefaultOn == true end
+    if current == nil then current = (Config.DefaultOn == true) end
     ply.state.speedLimiter_userOn = not current
 end)
+
 
 -- Re-check exemptions periodically (so job changes apply)
 CreateThread(function()

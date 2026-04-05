@@ -56,18 +56,21 @@ local function shouldLimiterRun(ped, veh)
     return true
 end
 
--- Optional toggle command + keybind
 CreateThread(function()
-    if Config.AllowToggle and Config.ToggleCommand and Config.ToggleCommand ~= '' then
+    if not Config.AllowToggle then return end
+
+    if Config.ToggleCommand and Config.ToggleCommand ~= '' then
         RegisterCommand(Config.ToggleCommand, function()
             TriggerServerEvent('qbx_speedlimiter:server:toggle')
         end, false)
     end
 
-    if Config.AllowToggle and Config.ToggleKeybind then
-        RegisterKeyMapping(Config.ToggleCommand or 'speedlimiter', 'Toggle Speed Limiter', 'keyboard', Config.ToggleKeybind)
+    -- Only register a bindable key mapping if you actually want a keybind.
+    if Config.ToggleKeybind and Config.ToggleCommand and Config.ToggleCommand ~= '' then
+        RegisterKeyMapping(Config.ToggleCommand, 'Toggle Speed Limiter', 'keyboard', Config.ToggleKeybind)
     end
 end)
+
 
 -- Listen to statebags pushed from server
 CreateThread(function()

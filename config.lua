@@ -11,17 +11,17 @@ Config.Enabled = true
 
 -- Default limit applied when nothing else matches.
 -- Set to nil/false to disable global default and only use class/model limits.
-Config.DefaultLimit = 150
+Config.DefaultLimit = 170
 
 -- How often to check/enforce (ms). Lower = tighter enforcement, higher = less CPU.
-Config.TickRate = 150
+Config.TickRate = 200
 
 -- =========================
 -- Optional: Toggle
 -- =========================
-Config.AllowToggle = true
+Config.AllowToggle = false
 Config.ToggleCommand = 'speedlimiter'   -- /speedlimiter
-Config.ToggleKeybind = 'F6'             -- set to nil to disable keybind
+Config.ToggleKeybind = 'nil'             -- set to nil to disable keybind
 
 -- If true, limiter starts ON for everyone
 Config.DefaultOn = true
@@ -30,10 +30,7 @@ Config.DefaultOn = true
 -- Optional: Exemptions
 -- =========================
 -- Qbox jobs to exempt (set to {} for none)
-Config.ExemptJobs = {
-    police = false,
-    ambulance = false,
-}
+Config.ExemptJobs = {}
 
 -- Exempt if in emergency vehicle with siren on? (good for police/ems pursuits)
 Config.ExemptIfSirenOn = false
@@ -63,9 +60,14 @@ Config.ModelLimits = {
     -- police3 = 150,
 }
 
--- -- =========================
--- -- Notifications (optional)
--- -- =========================
+-- =========================
+-- Notifications (disabled)
+-- =========================
+Config.Notify = function(_) end
+
+-- =========================
+-- Notifications (optional)
+-- =========================
 -- Config.Notify = function(msg)
 --     -- If you use ox_lib:
 --     if GetResourceState('ox_lib') == 'started' then
